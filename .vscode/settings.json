@@ -1,5 +1,20 @@
 {
     "files.exclude": {
         "**/__pycache__": true
-    }
+    },
+    "cSpell.words": [
+        "dunder",
+        "elif",
+        "frozenset",
+        "groceryarray",
+        "grocerydict",
+        "grocerylist",
+        "groceryset",
+        "pylint",
+        "testnum",
+        "teststring",
+        "visualstudioexptteam",
+        "vscodeintellicode"
+    ],
+    "python.linting.enabled": true
 }

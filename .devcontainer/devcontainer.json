@@ -1,9 +1,10 @@
 {
-	"name": "Python Sample",
+	"name": "Python Workshop",
 	"dockerFile": "Dockerfile",
 	"appPort": 9000,
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"visualstudioexptteam.vscodeintellicode"
 	],
 	"settings": {
 		"python.pythonPath": "/usr/local/bin/python",
