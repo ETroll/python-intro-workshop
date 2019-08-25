@@ -1,16 +1,24 @@
-# from array import array
+
 
 if __name__ == "__main__":
+    file : str = "hello.txt"
 
-    for i in range(10):
-        if i == 5:
-            continue
-        print(i)
+    # Overwrite the file if it exists
+    with open(file, "w+") as fileobj:
+        fileobj.write("Hello world\n")
 
-    for i in range(10):
-        if i == 5:
-            break
-        print(i)
+    with open(file, "r") as fileobj:
+        print(fileobj.readlines())
 
-        
+    # Append to file
+    with open(file, "a") as fileobj:
+        fileobj.write("Hello again\n")
 
+    # Read all lines as a list
+    with open(file, "r") as fileobj:
+        print(fileobj.readlines())
+
+    # Read line by line
+    with open(file, "r") as fileobj:
+        for line in fileobj:
+            print(line)

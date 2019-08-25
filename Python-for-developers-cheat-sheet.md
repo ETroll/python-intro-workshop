@@ -3,7 +3,11 @@
 //TODO: Write a few lines about python. The main difference is a 4 spaces indentations instead of 
 curly brackets to create code blocks / scopes.
 
+**DISCLAIMER:** I am normally a C# developer and my style of coding might not always be following the _"pythonic"_ way. I am no fan of snake case and prefer camelCase for functions and variables and PascalCase for Classes. Even if this might shine trough in this document, you can write the code however you like. If you want to learn Python the _"pythonic"_ way, then use snake case for variables and functions.
+
 This simple cheat sheet is created for Python 3.6.x and above. Some of the language basics shown here is not available for earlier versions of Python.
+
+Python documentation can be found at [docs.python.org](https://docs.python.org/3/). For a reference of the standard library then you can visit the [The Python Standard Library](https://docs.python.org/3/library/index.html). And for a complete reference on the language itself, then [The Python Language Reference](https://docs.python.org/3/reference/index.html) is the place to visit.
 
 ## Language basics
 It all begins with a simple hello world. Since Python just interprets a script top down, I recommend writing a test to se if the file interpreted is the main file. (The file started directly using `python filename.py` and not a imported file) Python will set the value of one of the ***dunder*** ([Ref](#Dunder)) variables to `__main__`
@@ -41,7 +45,7 @@ frozenset
 tuple
 bytes
 ```
-
+**Also note** that Python does not have `NULL` but it does have the `None` type that functions in almost the same way.
 
 ### Variables
 ``` python
@@ -199,7 +203,7 @@ if(testnum == 12 and teststring == "test"):
 
 ### Looping
 
-Note: For loop works somewhat different. There is no `for(;;)` in Python. For loops over iterators. So instead of writing `for(int i = 0; i<10; i++) { /* Something */}` that us Java / C# developers are used to we need to create a list a list containing the numbers 0 to 9. This can be done by using the `range([start: int = 0,] stop: int [, step: int = 1]) -> list` function. This returns a list with the numbers from `start` to `stop` with the `step` between the numbers.
+Note: For loop works somewhat different. There is no `for(;;)` in Python. The `for` keyword loops over iterators. So instead of writing `for(int i = 0; i<10; i++) { /* Something */}` that us Java / C# developers are used to we need to create a list a list containing the numbers 0 to 9. This can be done by using the `range([start: int = 0,] stop: int [, step: int = 1]) -> list` function. This returns a list with the numbers from `start` to `stop` with the `step` between the numbers.
 
 ``` Python
 grocerylist : list = ["Milk", "Bread", "Eggs", 13]
@@ -251,56 +255,249 @@ for i in range(10):
     print(i)
 ```
 
+### Slicing
 
+In Python you can easily slice a list/array/tuple (sequences really, but we will not go into details here) and get sections from it. It is also very easy to reverse it.
 
+To slice a list the following syntax is used: `somelist[start:stop:step]`
 
+``` Python
+grocerylist : list = ["Milk", "Bread", "Eggs", "Butter", "Chocolate"] 
+
+# Get first item in list
+print(grocerylist[0])
+
+# Use negative indexing to get last item in list
+# NOTE: a[-x] can be viewed as a[len(a)-x], this is called "negative indexing"
+print(grocerylist[-1])
+
+# Get the two first items in the list
+print(grocerylist[:2]) # Same as writing grocerylist[0:2]
+
+# Get every second element
+print(grocerylist[0::2])
+
+# Use negative indexing to reverse the list
+print(grocerylist[::-1])
+```
+
+### Functions
+
+A function is defined using the `def` keyword and the block of code that the function consists of are indented `4 spaces` from the function declaration.
+
+A _"type hint"_ can also be added as a part of the function definition. This will give a "hint" to the users of the function about what type it returns. If you have a linter enabled, then the linter will give you warnings or errors if you are not using correct types. As with typing and variables this is all optional and one of the newer language features.
+
+``` Python
+def myFunction() -> None:
+    print("Hello from my function")
+
+def addInteger(first: int, second: int) -> int:
+    # return keyword just as we are used to
+    return first + second
+
+def defaultValues(first: str = "Hello", second: str = "World") -> None:
+    print(f"{first} {second}")
+
+if __name__ == "__main__":
+    myFunction()
+    print(addInteger(2,2))
+
+    defaultValues()
+    defaultValues("Learning", "Python")
+
+    # Use arguments out of order by naming the parameter name
+    defaultValues(second="Webstep")
+```
+
+### Lambdas
+
+Python have recently got support for lambdas expressions. This is not full lambda functions as we are used to in C# and Java. It is used using the `lambda` keyword and the following syntax: `lambda <var>: <body> and returns a anonymous function.
+
+Lambdas is often used together with the built-in `map()`, `filter()` and `reduce()` functions. 
+
+``` Python
+numbers : list = [10, 2, 7, 6]
+
+# Add all numbers in the list by one, then create a new list
+print(list(map(lambda x: x + 1, numbers)))
+
+# Same as above, just using a anonymous function
+lambdaExample = lambda x: x + 1
+print(list(map(lambdaExample, numbers)))
+
+# Get all numbers divisible by 2
+print(list(filter(lambda x: x % 2 == 0, numbers)))
+
+# Sum all the numbers using reduce
+from functools import reduce
+print(reduce(lambda sum, num: sum + num, numbers))
+```
+
+### List comprehensions
+
+Many of the situations one would use `map()` with `lambda` one could use the more clean list comprehension syntax. The syntax is as follows: `newList = [expression(x) for x in oldList if filter(x)]`. In many cases the filter is not needed and we can simplify it as follows: `newList = [expression(x) for x in oldList]`
+
+``` Python
+# Add all numbers in the list by one
+print([x + 1 for x in numbers])
+
+# Add all numbers in the list by one if it is divisible by 2
+print([x + 1 for x in numbers if x % 2 == 0])
+```
+
+### Classes
+
+Python supports both procedural oriented programming as well as object oriented programming.
+
+Classes are declared using the `class` keyword and is very similar to a function definition in that it are declared using parenthesis and can take a optional argument. The optional argument is another class definition that the class will be "inheriting" from.
+
+The constructor is created using the `__init__` dunder method. All class methods has a first parameter named `self` that is a reference to the object instance. This is similar to the `this` keyword in C# and Java, but it is automatically passed as the first argument on any class method. 
+
+Class properties are not declared in advance. They are available as soon as they are used.
+
+There is no `public`, `private`, `protected`, etc keywords in Python. All properties and methods of a class is available as `public`. Instead a convention is used to "message" the users that a method or parameter is "private". This is done by encapsulating the property or method name with a double underscore (a "***dunder***"). So a method named `__somePrivateMethod(self, data)__` is considered `private` because of the **dunder** convention. This is same with properties like `self.__somePrivateProperty__ : int = 10`. Most linters will give you a error or a warning if you use any dunder methods outside its "allowed scope". 
+
+``` Python
+class Animal():
+    def __init__(self, name: str):
+        self.name = name
+
+    def makeSound(self):
+        print("Unknown sound")
+
+# Dog "inherits Animal"
+class Dog(Animal):
+    def __init__(self, name: str):
+        super().__init__(name)
+    
+    def makeSound(self):
+        print("Woof")
+
+if __name__ == "__main__":
+    dog : Animal = Dog("Balto")
+
+    dog.makeSound()
+    print(f"The animals name is: {dog.name}")
+```
+
+### Error (Exception) handling
+
+Python handles exceptions using the `try`, `except` and `else` keywords. Code that should run when an exception occurs are put in the `except` block. And code that should only be run if there are no exceptions should be put in the `else` block.
+
+`except` passes an argument that inherits the `BaseException` type. For more information about the Exception and Error types that are built-in you can visit the [Built-in Exceptions](https://docs.python.org/3/library/exceptions.html) page on docs.python.org.
+
+``` Python
+prompt: str = "How old are you? " 
+agestr: str = input(prompt) 
+
+try: 
+    age: int = int(agestr) 
+except ValueError: 
+    print("You did not enter a integer")      
+else: 
+    print(f"You are {age} years old")
+```
+
+### Math
+
+Python has its own math module as a part of its standard library just as most other languages. There are however some quirks that are original to Python that needs to be addressed. Except for these quirks the math module works as one would expect and is imported using the following import statement: `import math`
+
+In most other languages the power-of operator is the `^` sign. But for Python it is double asterisk `**` signs.
+
+In python you can do "floor division" using the integer division operator `//` directly instead of using `math.floor()` (Not available in Python 2)
+
+``` Python
+# One main difference / quirk is how "Power of" is written.
+print(f"The 2 in the power of 4 is {2**4}")
+
+# Integer division.
+print(f"3 / 4 is {3/4} but using integer division it is {3//4}")
+```
+
+### Import system
+
+To import modules and classes from files the `import` keyword is used like this `import X`. To import a specific class (or variable) from a file or module you can use the `from X import Y` syntax. If you want to use an alias for a file, module or a imported part you can use the `as` keyword as such: `import X as Y` or `from X import Y as Z`
+
+``` Python
+# Import a module called animals or local file called animals.py
+import animals
+
+dog : animals.Animal = animals.Dog("Balto")
+dog.makeSound()
+print(f"The animals name is: {dog.name}")
+```
+
+``` Python
+# Import Dog and Animal class from animals.py
+from animals import Dog, Animal
+
+dog : Animal = Dog("Balto")
+dog.makeSound()
+```
+
+``` Python
+# Import Dog class aliased as MyDog from animals.py
+from animals import Dog as MyDog
+
+dog : MyDog = MyDog("Balto")
+dog.makeSound()
+```
+
+``` Python
+# Import animals.py (or animals module) aliased as A
+import animals as A
+
+dog : A.Animal = A.Dog("Balto")
+dog.makeSound()
+```
+
+### File IO
+
+As most (if not all?) other languages, Python has built-in IO functions. To open and read or write to files you can use the `open()`, `close()`, `read()` and `write()` functions in a way that is not too unfamiliar if you have ever programmed in C. All files that are opened needs to be closed. But using the `with` keyword Python can automatically close the file when the execution gets out of the scope defined by the `with` keyword.
+
+ ``` Python
+file : str = "hello.txt"
+
+# Overwrite the file if it exists
+with open(file, "w+") as fileobj:
+    fileobj.write("Hello world\n")
+
+with open(file, "r") as fileobj:
+    print(fileobj.readlines())
+
+# Append to file
+with open(file, "a") as fileobj:
+    fileobj.write("Hello again\n")
+
+# Read all lines as a list
+with open(file, "r") as fileobj:
+    print(fileobj.readlines())
+
+# Read line by line
+with open(file, "r") as fileobj:
+    for line in fileobj:
+        print(line)
+```
 
 ## Modules
+
+Write some words about modules and where there are docs. I don't want to explain how to create modules in this intro.
 
 ## Packages and Pip
 
 ## Virtual Environments (`venv`)
 
+## Type hints
+
+In this document all functions and variables have been typed using type hints. This is just a personal preference, but I believe that it helps writing less error prone code. If you want to learn more about the support for type hints in Python than these PEPs will give more information:
+
+ - [PEP 483 - The Theory of Type Hints](https://www.python.org/dev/peps/pep-0483)
+ - [PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484)
+ - [PEP 526 - Syntax for Variable Annotations](https://www.python.org/dev/peps/pep-0526)
+
+There is also a more general information available at the official Python documentation:
+ 
+ - [Support for type hints](https://docs.python.org/3/library/typing.html)
+
 ## PEP8
 
-
-``` Python
-
-
-```
- - Language basics
-
-
-
-    - Other
-        - Try / catch
-        - With
-        - Slicing of lists
-            - Negative indexing
-                - a[-X] can be viewed as a[len(a)-X]
-            - Show example of slicing where negative step (::-1) is used
-        - Pass - the "null/noop operation".
-
-    - Math
-        - Most notably difference: ** is power of. Not ^ as others
-        - Integer division quirk. 3/4 => 0, 3/4. => 0.75. (Use // - Only Python 3)
-
-    - None == NULL
-    - Functions
-        - Def keyword
-        - Default parameters
-    - Objects and classes
-        - object
-        - dunder init (ctor) `__init__`
-        - self is first paramter of all class methods
-        - inheritance => subclassing
-    - File IO
-        - open/close
-        - use the with keyword for implicit closing of io :)
-    - Lambdas
-    - PEP 8 (Have a read, but we will not go into details here now)
- - Modules
- - Pip / Packages
- - Venv
- - Common "gotcha's" for java/c# devs
-  - No ++ operator!
