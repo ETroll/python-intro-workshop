@@ -1,7 +1,5 @@
 # Python for developers - Cheat sheet
 
-//TODO: Write a few lines about python. The main difference is a 4 spaces indentations instead of 
-curly brackets to create code blocks / scopes.
 
 **DISCLAIMER:** I am normally a C# developer and my style of coding might not always be following the _"pythonic"_ way. I am no fan of snake case and prefer camelCase for functions and variables and PascalCase for Classes. Even if this might shine trough in this document, you can write the code however you like. If you want to learn Python the _"pythonic"_ way, then use snake case for variables and functions.
 
@@ -10,9 +8,11 @@ This simple cheat sheet is created for Python 3.6.x and above. Some of the langu
 Python documentation can be found at [docs.python.org](https://docs.python.org/3/). For a reference of the standard library then you can visit the [The Python Standard Library](https://docs.python.org/3/library/index.html). And for a complete reference on the language itself, then [The Python Language Reference](https://docs.python.org/3/reference/index.html) is the place to visit.
 
 ## Language basics
-It all begins with a simple hello world. Since Python just interprets a script top down, I recommend writing a test to se if the file interpreted is the main file. (The file started directly using `python filename.py` and not a imported file) Python will set the value of one of the ***dunder*** ([Ref](#Dunder)) variables to `__main__`
+It all begins with a simple hello world. Since Python just interprets a script top down, I recommend writing a test to se if the file interpreted is the main file. (The file started directly using `python filename.py` and not a imported file) Python will set the value of one of the ***dunder*** ([Ref](#The-lack-of-private)) variables to `__main__`
 
 Python 3 introduced the print function. In earlier versions of python print was a statement. So when googling you will come across code using the `print` statement. If you want to use this code in Python 3 just replace it with `print()` and that older Python 2 code should work fine.
+
+One of the more larger differences and the most visible one when you come from other languages that follows the C-syntax. Is the lack of curly brackets. In Python different blocks of code are separated by indentations. The official docs says that the indentation should be 4 spaces long. A `tab` will work, but you will be more error prone to the "dreaded" `inconsistent use of tabs and spaces in indentation` error. In this workshop the use of 4 spaces over 1 tab is encouraged.
 
 ### Starting scripts
 
@@ -355,6 +355,7 @@ The constructor is created using the `__init__` dunder method. All class methods
 
 Class properties are not declared in advance. They are available as soon as they are used.
 
+#### The lack of private
 There is no `public`, `private`, `protected`, etc keywords in Python. All properties and methods of a class is available as `public`. Instead a convention is used to "message" the users that a method or parameter is "private". This is done by encapsulating the property or method name with a double underscore (a "***dunder***"). So a method named `__somePrivateMethod(self, data)__` is considered `private` because of the **dunder** convention. This is same with properties like `self.__somePrivateProperty__ : int = 10`. Most linters will give you a error or a warning if you use any dunder methods outside its "allowed scope". 
 
 ``` Python
@@ -365,11 +366,12 @@ class Animal():
     def makeSound(self):
         print("Unknown sound")
 
-# Dog "inherits Animal"
+# Dog "inherits" Animal
 class Dog(Animal):
     def __init__(self, name: str):
         super().__init__(name)
     
+    # Override base method
     def makeSound(self):
         print("Woof")
 
@@ -451,6 +453,8 @@ dog : A.Animal = A.Dog("Balto")
 dog.makeSound()
 ```
 
+More information about import can be read at [The import system](https://docs.python.org/3/reference/import.html) at docs.python.org.
+
 ### File IO
 
 As most (if not all?) other languages, Python has built-in IO functions. To open and read or write to files you can use the `open()`, `close()`, `read()` and `write()` functions in a way that is not too unfamiliar if you have ever programmed in C. All files that are opened needs to be closed. But using the `with` keyword Python can automatically close the file when the execution gets out of the scope defined by the `with` keyword.
@@ -481,11 +485,23 @@ with open(file, "r") as fileobj:
 
 ## Modules
 
-Write some words about modules and where there are docs. I don't want to explain how to create modules in this intro.
+In Python we package our libraries in modules. Modules are in essence just a folder that follows some conventions. Like having a `__init__.py` file that defines the classes, functions and variables that can be imported. But it is mostly based on convention. So if the `__init__.py` file is empty it will still work. (Although the import statement will not be that "clean" and "_pythonic_".)
+
+Covering modules and details about how to best organize your code when writing Python is not in the scope of this workshop. If you want to learn more about modules you can visit the [Modules](https://docs.python.org/3/tutorial/modules.html) site on docs.python.org.
 
 ## Packages and Pip
 
+Pip is the defacto package manager for Python. It is used to download libraries and other modules packaged as pip packages. To install a package in your Python environment you can just use the command: `pip install <package>`. For help on how to use pip just type `pip` in your terminal and a helpful help text will be printed in the console.
+
 ## Virtual Environments (`venv`)
+
+Virtual Environments are an isolated Python environment that allows packages to be installed for use by a particular application, rather than being installed system wide. So using a Virtual Environment helps us avoid the hassle of conflicts that can arise if you install all your pip packages system wide. Using a Virtual Environment you get a "clean" Python environment to play around with for each project.
+
+You can easily create a new Virtual Environment for your project using the `venv` module shipped in Python 3. The following snippet will create a new Virtual Environment named _devenv_ in the current working folder: `python -m venv devenv` (If multiple versions of Python is install replace `python`with `python3`)
+
+To activate and use the newly created Virtual Environment you need to run the `activate`script suitable for your system. So for Windows based system using CMD you would run `devenv\Scripts\activate.bat`.
+
+For more information about Virtual Environment visit [Creating Virtual Environments](https://packaging.python.org/tutorials/installing-packages/#creating-and-using-virtual-environments) on packaging.python.org.
 
 ## Type hints
 
@@ -501,3 +517,6 @@ There is also a more general information available at the official Python docume
 
 ## PEP8
 
+PEP8 is the official style guide for Python code. Most linters use this. I personally don't follow PEP8 all the time, but most of its content is very good. Most Python code I have read use this as a guide.
+
+If you want more information and read the guide then you can find it here at [PEP 8 - Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/).

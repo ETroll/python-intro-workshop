@@ -29,8 +29,9 @@ For this workshop I have created a small cheat sheet with previous C# or Java kn
 
 ## Exercises
 
-I am a big believer in _Learning by Doing_, so this workshop does not have any presentation at all. No slides! It is all about doing small exercises.
+I am a firm believer in _Learning by Doing_, so this workshop does not have any presentation at all. No slides! It is all about doing small exercises.
 
+//TODO: write exercise texts and solutions
  - Reverse word order
     - Pre existing file with a paragraph
     - IO
