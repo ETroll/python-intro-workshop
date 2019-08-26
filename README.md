@@ -5,7 +5,7 @@ A very quick introduction to the Python programming language through doing exerc
 ## Prerequisites
 
  - [VS Code](https://code.visualstudio.com/)
- - [Docker](https://www.docker.com/)
+ - [Docker](https://hub.docker.com/)
 
 ## Setting up the environment
 
