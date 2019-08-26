@@ -1,11 +1,11 @@
 # Python intro Workshop
 
-A very quick introduction to the Python programming language trough doing exercises.
+A very quick introduction to the Python programming language through doing exercises.
 
 ## Prerequisites
 
- - VS Code
- - Docker
+ - [VS Code](https://code.visualstudio.com/)
+ - [Docker](https://hub.docker.com/)
 
 ## Setting up the environment
 
@@ -15,7 +15,7 @@ the VSCode Remote Development extension.
 You can find the extension by searching after `Remote Development` in the extension tab. 
 Or by using the extension id `ms-vscode-remote.vscode-remote-extensionpack` directly.
 
-So as long as you have the prerequisites installed, we should be in the batters box and ready to go! Just open the folder in VSCode and click the green button in the lower left hand corner and choose: `Remote-Containers: Reopen folder in container`
+So as long as you have the prerequisites installed, we should be in the batters box and ready to go! Clone this repo `git clone https://github.com/ETroll/python-intro-workshop.git`, point VSCode to the cloned directory and click the green button in the lower left hand corner and choose: `Remote-Containers: Reopen folder in container`
 
 More information about development containers / remote containers can be found here: [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
 
