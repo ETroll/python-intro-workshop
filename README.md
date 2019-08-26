@@ -1,11 +1,11 @@
 # Python intro Workshop
 
-A very quick introduction to the Python programming language trough doing exercises.
+A very quick introduction to the Python programming language through doing exercises.
 
 ## Prerequisites
 
- - VS Code
- - Docker
+ - [VS Code](https://code.visualstudio.com/)
+ - [Docker](https://www.docker.com/)
 
 ## Setting up the environment
 
