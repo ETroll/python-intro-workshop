@@ -31,10 +31,20 @@ For this workshop I have created a small cheat sheet with previous C# or Java kn
 
 I am a firm believer in _Learning by Doing_, so this workshop does not have any presentation at all. No slides! It is all about doing small exercises.
 
-//TODO: write exercise texts and solutions
- - Reverse word order
-    - Pre existing file with a paragraph
-    - IO
-    - Slicing (negative step ::-1)
- - Rock Paper Scissors
- - Blackjack
+1. FizzBuzz - Write the "classic" FizzBuzz using Python. Create a function that takes a number.
+   - If the number is divisible by 3 - Return "Fizz"
+   - If it is divisible by 5 - Return "Buzz"
+   - If it is divisible by both 3 and 5 - Return "FizzBuzz"
+   - Otherwise - Return the number
+
+   Congrats! You solved the FizzBuzz "problem" using Python, you can now officially interview as a Python programmer ;)
+
+2. Write a program that asks the user for a sentence containing multiple words. Print back the sentence with the words outputted in reversed order. So the sentence: "`Hi! I am learning Python right now.`" Gets outputted: "`now. right Python learning am I Hi!`"
+   - Bonus: Do the same but read the sentence from the file named `sentence.txt` in the `exampledata\` folder.
+
+3. Create a "Rock-Paper-Scissors" game. The game will start with displaying the player a numbered choice of `rock`, `paper` and `scissors`. The player will choose one of the options by entering a number representing the choice. The computer will then choose a hand by random and compare it against the players hand. Who will be the winner? Remember the rules of the game:
+    - Rock beats scissors
+    - Scissors beats paper
+    - Paper beats rock
+
+4. Create a function that calculates the Scrabble value of a word given as a parameter. A file names `exampledata\scrabbleletters.json` contains a list of all words and their values to use in the calculations. Tip: There exists a built-in Python module called `json` that is _not_ described in the cheat sheet. Look up its documentation on [docs.python.org](docs.python.org).

@@ -388,6 +388,8 @@ Python handles exceptions using the `try`, `except` and `else` keywords. Code th
 
 `except` passes an argument that inherits the `BaseException` type. For more information about the Exception and Error types that are built-in you can visit the [Built-in Exceptions](https://docs.python.org/3/library/exceptions.html) page on docs.python.org.
 
+NOTE: The try/except "blocks" does not set up a scope. So all variables declared inside try (or except) are available to the same scope the try/except block exists inside. 
+
 ``` Python
 prompt: str = "How old are you? " 
 agestr: str = input(prompt) 
@@ -395,7 +397,9 @@ agestr: str = input(prompt)
 try: 
     age: int = int(agestr) 
 except ValueError: 
-    print("You did not enter a integer")      
+    print("You did not enter a integer")
+except Exception as e:
+    print(e)
 else: 
     print(f"You are {age} years old")
 ```

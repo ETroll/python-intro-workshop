@@ -1,0 +1,36 @@
+{
+    "values": [
+        {
+            "value": 1,
+            "letters": ["E", "A", "I", "O", "N", "R", "T", "L", "S", "U"]
+        },
+        {
+            "value": 2,
+            "letters": ["D", "G"]
+        },
+        {
+            "value": 3,
+            "letters": ["B", "C", "M", "P"]
+        },
+        {
+            "value": 4,
+            "letters": ["F", "H", "V", "W", "Y", "Å"]
+        },
+        {
+            "value": 5,
+            "letters": ["K", "Ø"]
+        },
+        {
+            "value": 6,
+            "letters": ["Æ"]
+        },
+        {
+            "value": 8,
+            "letters": ["J", "X"]
+        },
+        {
+            "value": 10,
+            "letters": ["Q", "Z"]
+        }
+    ]
+}
